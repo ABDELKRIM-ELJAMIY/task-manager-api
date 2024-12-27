@@ -21,3 +21,24 @@ router.get('/', async (req, res) => {
         res.status(500).send({ message: 'An error occurred while fetching tasks.' });
     }
 });
+
+
+router.put('/:id', async (req, res) => {
+    try {
+        await Task.findByIdAndUpdate(req.params.id, req.body);
+        res.status(200).send({ message: "Data Updated Succefully" });
+    } catch (error) {
+        res.status(500).send({ message: "Data Does not Updated Sucecfully" });
+    }
+});
+
+router.delete('/:id', async (req, res) => {
+    try {
+        await Task.findByIdAndDelete(req.params.id);
+        res.status(200).send({ message: "Data Deleted Succefully" });
+    } catch (error) {
+        res.status(500).send({ message: "Data Does not Deleted Sucecfully" });
+    }
+});
+
+module.exports = router;
